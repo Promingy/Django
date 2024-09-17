@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>About</h1>
+
+{{ my_html }}
+{{ my_html|safe}}
+
+{{ my_text }}, {{my_number}}
+
+<ul>
+    {% for char in my_list %}
+
+    {% if char == 3 %}
+       <li>{{ char|add:47 }}</li>
+    {% endif %}
+
+        <li>{{forloop.counter}} - {{char}}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
