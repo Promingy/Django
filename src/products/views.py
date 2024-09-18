@@ -72,12 +72,13 @@ def product_create_view(request): #/ Render initial Data
         "title": "My initial title",
         "description": "This is the coolest description ever"
     }
-    obj = Product.objects.get(id=1)
-    form = ProductForm(request.POST or None, initial=initial_data, instance=obj)
+    # obj = Product.objects.get(id=1)
+    # form = ProductForm(request.POST or None, initial=initial_data, instance=obj)
+    form = ProductForm(request.POST or None, initial=initial_data)
 
     if form.is_valid():
         form.save()
-        form = ProductForm(None, initial=initial_data, instance=obj)
+        form = ProductForm(None, initial=initial_data)
 
     context = {
         "form": form

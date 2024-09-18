@@ -21,4 +21,4 @@ class Product(models.Model):
             "featured": self.featured
         }
 
-        return dictionary9
+        return dictionary
