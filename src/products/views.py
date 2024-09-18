@@ -85,7 +85,20 @@ def product_create_view(request): #/ Render initial Data
 
     return render(request, "products/product_create.html", context)
 
-def dynamic_lookup_view(request, id):
+def product_update_view(request, id):
+    obj = get_object_or_404(Produt, id=id)
+    form = ProductForm(request.POST or None)
+
+    if form.iv_valid():
+        form.save()
+    
+    context = {
+        "form": form
+    }
+
+    return render(request, "products/product_create.html", context)
+
+def product_detail_view(request, id):
     obj = get_object_or_404(Product, id=id) # preferred method to handle not found exception and lookup, the below also works
 
     #! this is not the recommend way to look up items
@@ -116,3 +129,11 @@ def product_delete_view(request,id):
     }
 
     return render(request, "products/product_delete.html", context)
+
+def product_list_view(request):
+    queryset = Product.objects.all() # List
+    context = {
+        "object_list": queryset
+    }
+
+    return render(request, 'products/product_list.html', context)
