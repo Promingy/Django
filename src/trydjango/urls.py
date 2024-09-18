@@ -22,6 +22,7 @@ import products.views as products
 urlpatterns = [
     path("products/", include('products.urls')),
     path("blog/", include("blog.urls")),
+    path("courses/", include("courses.urls")),
 
     path("", pages.home_view, name="home"),
     path("about/<int:id>", pages.about_view, name="about"),
