@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, get_object_or_404
+from django.urls import reverse
+
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -26,7 +28,7 @@ class ArticleDetailView(DetailView):
     #     id_ = self.kwargs.get("id")
     #     return get_object_or_404(Article, id=id_)
 
-class ArticleCreateView(CreateView):
+class ArticleUpdateView(UpdateView):
     template_name = "blog/article_create.html"
     form_class = ArticleForm
     queryset = Article.objects.all()
@@ -34,7 +36,30 @@ class ArticleCreateView(CreateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
+    
 
+class ArticleCreateView(CreateView):
+    template_name = "blog/article_create.html"
+    form_class = ArticleForm
+    queryset = Article.objects.all()
+    # success_url = "/"
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+    
+    # def get_success_url(self):
+        # return "/" #some path
+
+class ArticleDeleteView(DeleteView):
+    template_name = "blog/article_delete.html"
+
+    def get_object(self):
+        id_ = self.kwargs.get("pk")
+        return get_object_or_404(Article, id=id_)
+        
+    def get_success_url(self):
+        return reverse("blog:list-view")
 
 #! this is regular way of doing views
 # def article_create_view(request):
